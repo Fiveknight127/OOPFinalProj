@@ -1,4 +1,5 @@
 package dataViewerJackVersion;
 
-public interface UIState {
+public class DataViewerHUDJ {
+
 }
