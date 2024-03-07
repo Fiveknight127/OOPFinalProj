@@ -3,8 +3,9 @@ package dataviewer2;
 import edu.du.dudraw.Draw;
 import edu.du.dudraw.DrawListener;
 
-import javax.swing.*;
+import javax.swing.JOptionPane;
 import java.io.FileNotFoundException;
+
 
 public class DataViewerHUD implements DrawListener {
 
@@ -22,7 +23,6 @@ public class DataViewerHUD implements DrawListener {
 
     public DataViewerHUD(DataViewer dataViewer){
 
-        this.window = new Draw();
         this.dataViewer = dataViewer;
         this.GUIState = new GUIMainMenuState(this.dataViewer);
 
@@ -33,7 +33,7 @@ public class DataViewerHUD implements DrawListener {
 
         // Add the mouse/key listeners
         window.addListener(this);
-
+        update();
     }
 
 
