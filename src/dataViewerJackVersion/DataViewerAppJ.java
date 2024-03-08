@@ -99,9 +99,13 @@ public class DataViewerAppJ implements DrawListener {
      * Output is shown based on the M_DO_TRACE constant.
      */
     private void trace(String format, Object...args) {
+    	try {
     	if(DO_TRACE) {
-    		System.out.print("TRACE: ");
+    		System.out.print("TRACE:  test");
     		System.out.println(String.format(format, args));
+    	}
+    	} catch(Exception e) {
+    		System.out.print(DO_DEBUG);
     	}
     }
     

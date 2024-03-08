@@ -34,6 +34,7 @@ public class DataViewerHUD implements DrawListener {
         // Add the mouse/key listeners
         window.addListener(this);
         update();
+        System.out.print(DO_DEBUG);
     }
 
 
