@@ -21,9 +21,11 @@ public class DataViewerHUD implements DrawListener {
 
 
 
-    public DataViewerHUD(DataViewer dataViewer){
+    public DataViewerHUD(String dataFile) throws FileNotFoundException {
 
-        this.dataViewer = dataViewer;
+        //this.dataViewer = new DataViewer(String dataFile);
+
+        this.dataViewer = new DataViewer(dataFile);
         this.GUIState = new GUIMainMenuState(this.dataViewer);
 
         // Setup the DuDraw board
@@ -130,7 +132,7 @@ public class DataViewerHUD implements DrawListener {
                         //m_selectedCountry = (String)selectedValue;
                         dataViewer.setM_selectedCountry((String) selectedValue);
                         try {
-                            dataViewer.loadData();
+                            dataViewer.loadData();// FIX HERE
                         }
                         catch(FileNotFoundException e) {
                             // convert to a runtime exception since
