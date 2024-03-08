@@ -527,7 +527,7 @@ public class DataViewerApp implements DrawListener {
 		boolean needsUpdatePlotData = false;
 		trace("key pressed '%c'", (char)key);
 		// regardless of draw mode, 'Q' or 'q' means quit:
-		if(key == 'Q') {
+		if(key == 'Q') {	
 			System.out.println("Bye");
 			System.exit(0);
 		}
