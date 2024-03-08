@@ -25,9 +25,7 @@ public class DataViewer {
     private final static int 		FILE_STATE_IDX = 3;
     private final static int 		FILE_TEMPERATURE_IDX = 1;
     private final static int 		FILE_UNCERTAINTY_IDX = 2;
-    private final static double		MENU_STARTING_X = 40.0;
-    private final static double 	MENU_STARTING_Y = 90.0;
-    private final static double 	MENU_ITEM_SPACING = 5.0;
+
     private final static String[] 	MONTH_NAMES = { "", // 1-based
             "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec" };
     private final static int		RECORD_MONTH_IDX = 1;
@@ -62,12 +60,12 @@ public class DataViewer {
     private TreeMap<Integer,Double> m_plotMonthlyMaxValue = null;
     private TreeMap<Integer,Double> m_plotMonthlyMinValue = null;
 
-    private DataViewerHUD display;
+    //private DataViewerHUD display;
 
     public DataViewer(String dataFile) throws FileNotFoundException {
         this.m_dataFile=dataFile;
 
-        this.display=new DataViewerHUD(this);
+        //this.display=new DataViewerHUD(this);
 
         loadData();
 
