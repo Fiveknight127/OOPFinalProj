@@ -74,8 +74,7 @@ private ProcessData pd;
         pd.loadData();
 //=======
         //this.display=new DataViewerHUD(this);
-
-        pd.loadData();
+        
 //>>>>>>> branch 'main' of https://github.com/Fiveknight127/OOPFinalProj.git
 
     }
