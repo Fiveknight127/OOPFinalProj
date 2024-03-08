@@ -109,12 +109,16 @@ public class DataViewerHUD implements DrawListener {
             if(key == 'P') {
                 // plot the data
                 //m_guiMode = GUI_MODE_DATA; OLD
+            	try {
                 GUIState = new GUIDataState(dataViewer);
                 if(dataViewer.getM_plotData() == null) {
                     // first time going to render data need to generate the plot data
                     needsUpdatePlotData = true;
                 }
                 needsUpdate = true;
+            	} catch (Exception e){
+            	System.out.println("Error: Some values null");
+            	}
             }
             else if(key == 'C') {
                 // set the Country
