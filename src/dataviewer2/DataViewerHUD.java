@@ -131,14 +131,14 @@ public class DataViewerHUD implements DrawListener {
                         // change in data
                         //m_selectedCountry = (String)selectedValue;
                         dataViewer.setM_selectedCountry((String) selectedValue);
-                        try {
-                            dataViewer.loadData();// FIX HERE
-                        }
-                        catch(FileNotFoundException e) {
-                            // convert to a runtime exception since
-                            // we can't add throws to this method
-                            throw new RuntimeException(e);
-                        }
+//                        try {
+                        dataViewer.loadData();
+//                        }
+//                        catch(FileNotFoundException e) {
+//                            // convert to a runtime exception since
+//                            // we can't add throws to this method
+//                            throw new RuntimeException(e);
+//                        }
                         needsUpdate = true;
                         needsUpdatePlotData = true;
                     }
@@ -214,7 +214,7 @@ public class DataViewerHUD implements DrawListener {
                 Object selectedValue = JOptionPane.showInputDialog(null,
                         "Choose the visualization mode", "Input",
                         JOptionPane.INFORMATION_MESSAGE, null,
-                        DataViewer.getVisualizationModes(), dataViewer.getM_selectedVisualization());
+                        dataViewer.getVisualizationModes(), dataViewer.getM_selectedVisualization());
 
                 if(selectedValue != null) {
                     info("User seleted: '%s'", selectedValue);

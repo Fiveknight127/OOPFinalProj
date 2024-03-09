@@ -318,8 +318,10 @@ private ProcessData pd;
         return pd.getM_dataCountries();
     }
 //
-    public static String[] getVisualizationModes(){
+    public String[] getVisualizationModes(){
     	return pd.getVisualizationModes(); //FIX
+        //this.pd.get
+
     	}
 
     public void setM_selectedCountry(String m_selectedCountry) {
@@ -344,5 +346,14 @@ private ProcessData pd;
     public void setM_selectedVisualization(String m_selectedVisualization) {
 //        this.m_selectedVisualization = m_selectedVisualization;
     	pd.setM_selectedVisualization(m_selectedVisualization);
+    }
+
+    public void loadData(){
+        try{
+        this.pd.loadData();
+        }
+        catch (FileNotFoundException e){
+            e.printStackTrace();
+        }
     }
 }

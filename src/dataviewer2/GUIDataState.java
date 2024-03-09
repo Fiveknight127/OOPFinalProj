@@ -50,7 +50,7 @@ public class GUIDataState extends GUIState{
 
         //debug("cellWidth = %f, cellHeight = %f", cellWidth, cellHeight);
 
-        boolean extremaVisualization = super.dataViewer.getM_selectedVisualization().equals(DataViewer.getVisualizationModes()[VISUALIZATION_EXTREMA_IDX]);
+        boolean extremaVisualization = super.dataViewer.getM_selectedVisualization().equals(dataViewer.getVisualizationModes()[VISUALIZATION_EXTREMA_IDX]);
         //info("visualization: %s (extrema == %b)", super.dataViewer.getM_selectedVisualization(), extremaVisualization);
 
         for(int month = 1; month <= 12; month++) {
