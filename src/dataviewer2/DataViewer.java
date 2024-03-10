@@ -1,16 +1,16 @@
 package dataviewer2;
 
 //import edu.du.dudraw.Draw;
-import java.awt.Color;
-import java.io.File;
+//import java.awt.Color;
+//import java.io.File;
 import java.io.FileNotFoundException;
-import java.util.ArrayList;
+//import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
+//import java.util.Scanner;
 import java.util.SortedMap;
 import java.util.SortedSet;
 import java.util.TreeMap;
-import java.util.TreeSet;
+//import java.util.TreeSet;
 
 public class DataViewer {
     // Private constants (alphabetical)
