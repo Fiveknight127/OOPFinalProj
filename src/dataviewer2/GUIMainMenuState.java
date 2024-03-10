@@ -18,8 +18,6 @@ public class GUIMainMenuState extends GUIState {
 
     }
 
-
-
     @Override
     public void drawState(Draw window) {
         window.clear(Color.WHITE);
