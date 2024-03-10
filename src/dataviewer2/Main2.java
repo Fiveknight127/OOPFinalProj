@@ -1,7 +1,5 @@
 package dataviewer2;
 
-import dataviewer1orig.DataViewerApp;
-
 import java.io.FileNotFoundException;
 
 public class Main2 {

@@ -28,16 +28,16 @@ public class GUIDataState extends GUIState{
     @Override
     public void drawState(Draw window) {
         // Give a buffer around the plot window
-        window.setXscale(-DATA_WINDOW_BORDER, DataViewerHUD.getWindowWidth()+DATA_WINDOW_BORDER);
-        window.setYscale(-DATA_WINDOW_BORDER, DataViewerHUD.getWindowHeight()+DATA_WINDOW_BORDER);
+        window.setXscale(-DATA_WINDOW_BORDER, window.getCanvasWidth()+DATA_WINDOW_BORDER);
+        window.setYscale(-DATA_WINDOW_BORDER, window.getCanvasHeight()+DATA_WINDOW_BORDER);
 
         // gray background
         window.clear(Color.LIGHT_GRAY);
 
         // white plot area
         window.setPenColor(Color.WHITE);
-        window.filledRectangle(DataViewerHUD.getWindowWidth()/2.0, DataViewerHUD.getWindowHeight()/2.0, DataViewerHUD.getWindowWidth()/2.0, DataViewerHUD.getWindowHeight()/2.0);
-
+        //window.filledRectangle(DataViewerHUD.getWindowWidth()/2.0, DataViewerHUD.getWindowHeight()/2.0, DataViewerHUD.getWindowWidth()/2.0, DataViewerHUD.getWindowHeight()/2.0);
+        window.filledRectangle(window.getCanvasWidth()/2.0, window.getCanvasHeight()/2.0, window.getCanvasWidth()/2.0, window.getCanvasHeight()/2.0);
         window.setPenColor(Color.BLACK);
 
         double nCols = 12; // one for each month
@@ -45,8 +45,9 @@ public class GUIDataState extends GUIState{
 
         //debug("nCols = %f, nRows = %f", nCols, nRows);
 
-        double cellWidth = DataViewerHUD.getWindowWidth() / nCols;
-        double cellHeight = DataViewerHUD.getWindowHeight() / nRows;
+
+        double cellWidth = window.getCanvasWidth()/nCols;
+        double cellHeight = window.getCanvasHeight()/nRows;
 
         //debug("cellWidth = %f, cellHeight = %f", cellWidth, cellHeight);
 
@@ -62,7 +63,7 @@ public class GUIDataState extends GUIState{
             // draw the line separating the months and the month label
             window.setPenColor(Color.BLACK);
             double lineX = (month-1.0)*cellWidth;
-            window.line(lineX, 0.0, lineX, DataViewerHUD.getWindowHeight());
+            window.line(lineX, 0.0, lineX, window.getCanvasHeight());
             window.text(lineX+cellWidth/2.0, -DATA_WINDOW_BORDER/2.0, MONTH_NAMES[month]);
 
             // there should always be a map for the month

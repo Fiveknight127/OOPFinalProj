@@ -255,10 +255,6 @@ public class ProcessData {
     
     }
     
-    public String getM_dataFile() {
-    	return m_dataFile;
-    }
-    
     public List<List<Object>> getM_dataRaw() {
     	return m_dataRaw;
     }

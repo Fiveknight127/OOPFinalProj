@@ -257,8 +257,6 @@ public class DataViewerHUD implements DrawListener {
 
 
     //TODO LEAVE UNSORTED
-
-
     @Override
     public void mousePressed(double v, double v1) {
 
@@ -284,22 +282,9 @@ public class DataViewerHUD implements DrawListener {
 
     }
 
-
-
-
-
     @Override
     public void keyReleased(int i) {
 
     }
-
-    public static int getWindowHeight(){
-        return WINDOW_HEIGHT;
-    }
-
-    public static int getWindowWidth(){
-        return WINDOW_WIDTH;
-    }
-
 
 }
