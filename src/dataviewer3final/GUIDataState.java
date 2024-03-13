@@ -1,4 +1,4 @@
-package dataviewer2;
+package dataviewer3final;
 
 import edu.du.dudraw.Draw;
 
@@ -6,7 +6,7 @@ import java.awt.*;
 import java.util.SortedMap;
 
 
-public class GUIDataState extends GUIState{
+public class GUIDataState extends GUIState {
 
     private final static int 		VISUALIZATION_RAW_IDX = 0;
     private final static int		VISUALIZATION_EXTREMA_IDX = 1;

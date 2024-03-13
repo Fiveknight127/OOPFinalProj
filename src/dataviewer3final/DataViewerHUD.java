@@ -1,9 +1,9 @@
-package dataviewer2;
+package dataviewer3final;
 
 import edu.du.dudraw.Draw;
 import edu.du.dudraw.DrawListener;
 
-import javax.swing.JOptionPane;
+import javax.swing.*;
 import java.io.FileNotFoundException;
 
 
@@ -16,7 +16,7 @@ public class DataViewerHUD implements DrawListener {
     private final static int 		WINDOW_WIDTH = 1320; // should be a multiple of 12
 
     private Draw window;
-    private GUIState GUIState;
+    private dataviewer3final.GUIState GUIState;
     private DataViewer dataViewer;
 
 
