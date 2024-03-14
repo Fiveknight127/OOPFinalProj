@@ -1,12 +1,11 @@
-package dataviewer2;
+package dataviewer3final;
 
 //import edu.du.dudraw.Draw;
 //import java.awt.Color;
 //import java.io.File;
+
 import java.io.FileNotFoundException;
-//import java.util.ArrayList;
 import java.util.List;
-//import java.util.Scanner;
 import java.util.SortedMap;
 import java.util.SortedSet;
 import java.util.TreeMap;

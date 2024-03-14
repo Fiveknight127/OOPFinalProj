@@ -1,8 +1,8 @@
-package dataviewer2;
+package dataviewer3final;
 
 import java.io.FileNotFoundException;
 
-public class Main2 {
+public class Main3 {
 
     public static void main(String[] args) throws FileNotFoundException {
         String data = "data/GlobalLandTemperaturesByState.csv";

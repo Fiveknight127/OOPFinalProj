@@ -1,9 +1,9 @@
-package dataviewer2;
+package dataviewer3final;
 
 import edu.du.dudraw.Draw;
 import edu.du.dudraw.DrawListener;
 
-import javax.swing.JOptionPane;
+import javax.swing.*;
 import java.io.FileNotFoundException;
 
 
@@ -16,7 +16,7 @@ public class DataViewerHUD implements DrawListener {
     private final static int 		WINDOW_WIDTH = 1320; // should be a multiple of 12
 
     private Draw window;
-    private GUIState GUIState;
+    private dataviewer3final.GUIState GUIState;
     private DataViewer dataViewer;
 
 
@@ -36,7 +36,6 @@ public class DataViewerHUD implements DrawListener {
         // Add the mouse/key listeners
         window.addListener(this);
         update();
-        System.out.print(DO_DEBUG);
     }
 
 
@@ -112,16 +111,12 @@ public class DataViewerHUD implements DrawListener {
             if(key == 'P') {
                 // plot the data
                 //m_guiMode = GUI_MODE_DATA; OLD
-            	try {
                 GUIState = new GUIDataState(dataViewer);
                 if(dataViewer.getM_plotData() == null) {
                     // first time going to render data need to generate the plot data
                     needsUpdatePlotData = true;
                 }
                 needsUpdate = true;
-            	} catch (Exception e){
-            	System.out.println("Error: Some values null");
-            	}
             }
             else if(key == 'C') {
                 // set the Country
