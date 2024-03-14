@@ -1,4 +1,4 @@
-package dataviewer2;
+	package dataviewer2;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -219,44 +219,4 @@ public class ProcessData {
     public String getM_selectedVisualization() {
         return m_selectedVisualization;
     }
-    
-    public SortedSet<String> getM_dataStates() {
-        return m_dataStates;
-    }
-
-    public SortedSet<Integer> getM_dataYears() {
-        return m_dataYears;
-    }
-
-    public SortedSet<String> getM_dataCountries() {
-        return m_dataCountries;
-    }
-
-    public static String[] getVisualizationModes(){return VISUALIZATION_MODES;}
-
-    public void setM_selectedCountry(String m_selectedCountry) {
-        this.m_selectedCountry = m_selectedCountry;
-    }
-
-    public void setM_selectedEndYear(Integer m_selectedEndYear) {
-        this.m_selectedEndYear = m_selectedEndYear;
-    }
-
-    public void setM_selectedState(String m_selectedState) {
-        this.m_selectedState = m_selectedState;
-    }
-
-    public void setM_selectedStartYear(Integer m_selectedStartYear) {
-        this.m_selectedStartYear = m_selectedStartYear;
-    }
-
-    public void setM_selectedVisualization(String m_selectedVisualization) {
-        this.m_selectedVisualization = m_selectedVisualization;
-    
-    }
-    
-    public List<List<Object>> getM_dataRaw() {
-    	return m_dataRaw;
-    }
-    
 }
