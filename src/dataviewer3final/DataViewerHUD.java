@@ -21,11 +21,11 @@ public class DataViewerHUD implements DrawListener {
 
 
 
-    public DataViewerHUD(String dataFile) throws FileNotFoundException {
+    public DataViewerHUD(DataViewer dv) throws FileNotFoundException {
 
         //this.dataViewer = new DataViewer(String dataFile);
-
-        this.dataViewer = new DataViewer(dataFile);
+        this.dataViewer = dv;
+        //this.dataViewer = new DataViewer(dataFile);
         this.GUIState = new GUIMainMenuState(this.dataViewer);
 
         // Setup the DuDraw board

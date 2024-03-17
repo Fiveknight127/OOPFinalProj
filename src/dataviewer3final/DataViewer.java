@@ -40,11 +40,14 @@ private ProcessData pd;
     private TreeMap<Integer,Double> m_plotMonthlyMaxValue = null;
     private TreeMap<Integer,Double> m_plotMonthlyMinValue = null;
 
+    private DataViewerHUD window;
+
     //private DataViewerHUD display;
 
     public DataViewer(String dataFile) throws FileNotFoundException {
     	
     	this.pd = new ProcessData(dataFile);
+        this.window = new DataViewerHUD(this);
         pd.loadData();
 
     }
