@@ -41,7 +41,10 @@ public class ProcessData {
 	
 	
     public ProcessData(String m_file) {
-    	this.m_dataFile = m_file; 
+    	this.m_dataFile = m_file;
+        try{
+        loadData();}
+        catch (FileNotFoundException e){e.printStackTrace();}
     }
     
     public void loadData() throws FileNotFoundException {
@@ -71,6 +74,8 @@ public class ProcessData {
             m_selectedState = m_dataStates.first();
             m_selectedStartYear = m_dataYears.first();
             m_selectedEndYear = m_dataYears.last();
+
+            System.out.println("TestA");
 
             //info("loaded %d data records", m_dataRaw.size());
             //info("loaded data for %d states", m_dataStates.size());
