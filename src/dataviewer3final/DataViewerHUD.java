@@ -1,5 +1,6 @@
 package dataviewer3final;
 
+
 import edu.du.dudraw.Draw;
 import edu.du.dudraw.DrawListener;
 
@@ -9,14 +10,12 @@ import java.io.FileNotFoundException;
 
 public class DataViewerHUD implements DrawListener {
 
-    private final static boolean	DO_DEBUG = true;
-    private final static boolean	DO_TRACE = false;
     private final static int 		WINDOW_HEIGHT = 720;
     private final static String 	WINDOW_TITLE = "DataViewer Application";
     private final static int 		WINDOW_WIDTH = 1320; // should be a multiple of 12
 
     private Draw window;
-    private dataviewer3final.GUIState GUIState;
+    private GUIState GUIState;
     private DataViewer dataViewer;
 
 
@@ -47,61 +46,11 @@ public class DataViewerHUD implements DrawListener {
     }
 
 
-
-
-    //HELPER COMMANDS
-    /**
-     * For debugging.  Use 'trace' for older debugging messages that you don't want to see.
-     *
-     * Output is shown based on the M_DO_TRACE constant.
-     */
-    private void trace(String format, Object...args) {
-        if(DO_TRACE) {
-            System.out.print("TRACE: ");
-            System.out.println(String.format(format, args));
-        }
-    }
-
-    /**
-     * For informational output.
-     * @param format
-     * @param args
-     */
-    private void info(String format, Object... args) {
-        System.out.print("INFO: ");
-        System.out.println(String.format(format, args));
-    }
-
-    /**
-     * For error output.
-     * @param format
-     * @param args
-     */
-    private void error(String format, Object... args) {
-        System.out.print("ERROR: ");
-        System.out.println(String.format(format, args));
-    }
-
-    /**
-     * For debugging output.  Output is controlled by the DO_DEBUG constant.
-     * @param format
-     * @param args
-     */
-    private void debug(String format, Object... args) {
-        if(DO_DEBUG) {
-            System.out.print("DEBUG: ");
-            System.out.println(String.format(format, args));
-        }
-    }
-
-
-
-
     @Override
     public void keyPressed(int key) {
         boolean needsUpdate = false;
         boolean needsUpdatePlotData = false;
-        trace("key pressed '%c'", (char)key);
+        StaticDebuggingStatements.trace("key pressed '%c'", (char)key);
         // regardless of draw mode, 'Q' or 'q' means quit:
         if(key == 'Q') {
             System.out.println("Bye");
@@ -126,7 +75,7 @@ public class DataViewerHUD implements DrawListener {
                         dataViewer.getM_dataCountries().toArray(), dataViewer.getM_selectedCountry());
 
                 if(selectedValue != null) {
-                    info("User selected: '%s'", selectedValue);
+                    StaticDebuggingStatements.info("User selected: '%s'", selectedValue);
                     if(!selectedValue.equals(dataViewer.getM_selectedCountry())) {
                         // change in data
                         //m_selectedCountry = (String)selectedValue;
@@ -153,7 +102,7 @@ public class DataViewerHUD implements DrawListener {
                         dataViewer.getM_dataStates().toArray(), dataViewer.getM_selectedState());
 
                 if(selectedValue != null) {
-                    info("User selected: '%s'", selectedValue);
+                    StaticDebuggingStatements.info("User selected: '%s'", selectedValue);
                     if(!selectedValue.equals(dataViewer.getM_selectedState())) {
                         // change in data
                         //m_selectedState = (String)selectedValue;
@@ -171,10 +120,10 @@ public class DataViewerHUD implements DrawListener {
                         dataViewer.getM_dataYears().toArray(), dataViewer.getM_selectedStartYear());
 
                 if(selectedValue != null) {
-                    info("User seleted: '%s'", selectedValue);
+                    StaticDebuggingStatements.info("User seleted: '%s'", selectedValue);
                     Integer year = (Integer)selectedValue;
                     if(year.compareTo(dataViewer.getM_selectedEndYear()) > 0) {
-                        error("new start year (%d) must not be after end year (%d)", year, dataViewer.getM_selectedEndYear());
+                        StaticDebuggingStatements.error("new start year (%d) must not be after end year (%d)", year, dataViewer.getM_selectedEndYear());
                     }
                     else {
                         if(!dataViewer.getM_selectedStartYear().equals(year)) {
@@ -194,10 +143,10 @@ public class DataViewerHUD implements DrawListener {
                         dataViewer.getM_dataYears().toArray(), dataViewer.getM_selectedEndYear());
 
                 if(selectedValue != null) {
-                    info("User seleted: '%s'", selectedValue);
+                    StaticDebuggingStatements.info("User seleted: '%s'", selectedValue);
                     Integer year = (Integer)selectedValue;
                     if(year.compareTo(dataViewer.getM_selectedStartYear()) < 0) {
-                        error("new end year (%d) must be not be before start year (%d)", year, dataViewer.getM_selectedStartYear());
+                        StaticDebuggingStatements.error("new end year (%d) must be not be before start year (%d)", year, dataViewer.getM_selectedStartYear());
                     }
                     else {
                         if(!dataViewer.getM_selectedEndYear().equals(year)) {
@@ -217,7 +166,7 @@ public class DataViewerHUD implements DrawListener {
                         dataViewer.getVisualizationModes(), dataViewer.getM_selectedVisualization());
 
                 if(selectedValue != null) {
-                    info("User seleted: '%s'", selectedValue);
+                    StaticDebuggingStatements.info("User seleted: '%s'", selectedValue);
                     String visualization = (String)selectedValue;
                     if(!dataViewer.getM_selectedVisualization().equals(visualization)) {
                         //m_selectedVisualization = visualization;

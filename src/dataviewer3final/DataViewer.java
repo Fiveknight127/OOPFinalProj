@@ -32,6 +32,7 @@ public class DataViewer {
     private final static int		RECORD_YEAR_IDX = 0;
 
 
+
 private ProcessData pd;
     
     // plot-related data
@@ -47,7 +48,6 @@ private ProcessData pd;
     	
     	this.pd = new ProcessData(dataFile);
         this.window = new DataViewerHUD(this);
-        pd.loadData();
 
     }
 
@@ -61,7 +61,7 @@ private ProcessData pd;
     }
 
     public void updatePlotData() {
-        //debug("raw data: %s", m_rawData.toString());
+        //StaticDebuggingStatements.debug("raw data: %s", pd.getM_dataRaw().toString());
         // plot data is a map where the key is the Month, and the value is a sorted map where the key
         // is the year.
         m_plotData = new TreeMap<Integer,SortedMap<Integer,Double>>();
@@ -101,7 +101,7 @@ private ProcessData pd;
                 m_plotData.get(month).put(year, value);
             }
         }
-        //debug("plot data: %s", m_plotData.toString());
+        //StaticDebuggingStatements.debug("plot data: %s", m_plotData.toString());
     }
 
 
@@ -160,11 +160,11 @@ private ProcessData pd;
 
     	}
 
-    public void setM_selectedCountry(String m_selectedCountry) {
-    	pd.setM_selectedCountry(m_selectedCountry);
-    }
-
     //SETTERS
+
+    public void setM_selectedCountry(String m_selectedCountry) {
+        pd.setM_selectedCountry(m_selectedCountry);
+    }
 
     public void setM_selectedEndYear(Integer m_selectedEndYear) {
 //        this.m_selectedEndYear = m_selectedEndYear;
@@ -185,5 +185,7 @@ private ProcessData pd;
 //        this.m_selectedVisualization = m_selectedVisualization;
     	pd.setM_selectedVisualization(m_selectedVisualization);
     }
+
+
 
 }

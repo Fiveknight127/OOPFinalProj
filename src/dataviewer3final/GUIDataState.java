@@ -44,16 +44,16 @@ public class GUIDataState extends GUIState {
         double nCols = 12; // one for each month
         double nRows = super.dataViewer.getM_selectedEndYear() - super.dataViewer.getM_selectedStartYear() + 1; // for the years
 
-        //debug("nCols = %f, nRows = %f", nCols, nRows);
+        StaticDebuggingStatements.debug("nCols = %f, nRows = %f", nCols, nRows);
 
 
         double cellWidth = window.getCanvasWidth()/nCols;
         double cellHeight = window.getCanvasHeight()/nRows;
 
-        //debug("cellWidth = %f, cellHeight = %f", cellWidth, cellHeight);
+        StaticDebuggingStatements.debug("cellWidth = %f, cellHeight = %f", cellWidth, cellHeight);
 
         boolean extremaVisualization = super.dataViewer.getM_selectedVisualization().equals(dataViewer.getVisualizationModes()[VISUALIZATION_EXTREMA_IDX]);
-        //info("visualization: %s (extrema == %b)", super.dataViewer.getM_selectedVisualization(), extremaVisualization);
+        StaticDebuggingStatements.info("visualization: %s (extrema == %b)", super.dataViewer.getM_selectedVisualization(), extremaVisualization);
 
         for(int month = 1; month <= 12; month++) {
             double fullRange = dataViewer.getM_plotMonthlyMaxValue().get(month) - dataViewer.getM_plotMonthlyMinValue().get(month);
@@ -100,7 +100,7 @@ public class GUIDataState extends GUIState {
 
                     // draw the rectangle for this data point
                     window.setPenColor(cellColor);
-                    //trace("month = %d, year = %d -> (%f, %f) with %s", month, year, x, y, cellColor.toString());
+                    StaticDebuggingStatements.trace("month = %d, year = %d -> (%f, %f) with %s", month, year, x, y, cellColor.toString());
                     window.filledRectangle(x, y, cellWidth/2.0, cellHeight/2.0);
                 }
             }
@@ -117,7 +117,7 @@ public class GUIDataState extends GUIState {
             return null;
         }
         double pct = (value - TEMPERATURE_MIN_C) / TEMPERATURE_RANGE;
-        //trace("converted %f raw value to %f %%", value, pct);
+        StaticDebuggingStatements.trace("converted %f raw value to %f %%", value, pct);
 
         if (pct > 1.0) {
             pct = 1.0;
@@ -137,7 +137,7 @@ public class GUIDataState extends GUIState {
             r = g = b = (int)(255.0 * pct);
         }
 
-        //trace("converting %f to [%d, %d, %d]", value, r, g, b);
+        StaticDebuggingStatements.trace("converting %f to [%d, %d, %d]", value, r, g, b);
 
         return new Color(r, g, b);
     }

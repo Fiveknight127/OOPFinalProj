@@ -7,6 +7,7 @@ public class ExtremaStrategy extends VisualizationStrategy{
 	@Override
 	public Color execute() {
 		// TODO Auto-generated method stub
+		// TODO Hi Sean!
 		return null;
 	}
 

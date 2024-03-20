@@ -75,11 +75,9 @@ public class ProcessData {
             m_selectedStartYear = m_dataYears.first();
             m_selectedEndYear = m_dataYears.last();
 
-            System.out.println("TestA");
-
-            //info("loaded %d data records", m_dataRaw.size());
-            //info("loaded data for %d states", m_dataStates.size());
-            //info("loaded data for %d years [%d, %d]", m_dataYears.size(), m_selectedStartYear, m_selectedEndYear);
+            StaticDebuggingStatements.info("loaded %d data records", m_dataRaw.size());
+            StaticDebuggingStatements.info("loaded data for %d states", m_dataStates.size());
+            StaticDebuggingStatements.info("loaded data for %d years [%d, %d]", m_dataYears.size(), m_selectedStartYear, m_selectedEndYear);
         }
     }
     
@@ -99,15 +97,15 @@ public class ProcessData {
         }
         m_dataCountries.add(rawValues.get(FILE_COUNTRY_IDX));
         if(rawValues.size() != FILE_NUM_COLUMNS) {
-            //trace("malformed line '%s'...skipping", line);
+            StaticDebuggingStatements.trace("malformed line '%s'...skipping", line);
             return null;
         }
         else if(!rawValues.get(FILE_COUNTRY_IDX).equals(m_selectedCountry)) {
-            //trace("skipping non-USA record: %s", rawValues);
+            StaticDebuggingStatements.trace("skipping non-USA record: %s", rawValues);
             return null;
         }
         else {
-            //trace("processing raw data: %s", rawValues.toString());
+            StaticDebuggingStatements.trace("processing raw data: %s", rawValues.toString());
         }
         try {
             // Parse these into more useful objects than String
@@ -137,7 +135,7 @@ public class ProcessData {
             return values;
         }
         catch(NumberFormatException e) {
-            //trace("unable to parse data line, skipping...'%s'", line);
+            StaticDebuggingStatements.trace("unable to parse data line, skipping...'%s'", line);
             return null;
         }
     }
@@ -164,7 +162,7 @@ public class ProcessData {
             throw new RuntimeException(String.format("Unexpected date delimiter: '%s'", dateString));
         }
         if(ret == null || ret.intValue() < 1 || ret.intValue() > 12) {
-            //trace("Unable to parse month from date: '%s'", dateString);
+            StaticDebuggingStatements.trace("Unable to parse month from date: '%s'", dateString);
             return null;
         }
         return ret;
@@ -191,7 +189,7 @@ public class ProcessData {
             throw new RuntimeException(String.format("Unexpected date delimiter: '%s'", dateString));
         }
         if(ret == null) {
-            //trace("Unable to parse year from date: '%s'", dateString);
+            StaticDebuggingStatements.trace("Unable to parse year from date: '%s'", dateString);
         }
         return ret;
     }
@@ -230,6 +228,8 @@ public class ProcessData {
     public SortedSet<String> getM_dataCountries() {
         return m_dataCountries;
     }
+
+
 
     public static String[] getVisualizationModes(){return VISUALIZATION_MODES;}
 
