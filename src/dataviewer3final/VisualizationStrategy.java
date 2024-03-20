@@ -2,6 +2,8 @@ package dataviewer3final;
 
 import java.awt.Color;
 
-public interface VisualizationStrategy {
-	Color execute();
+public abstract class VisualizationStrategy {
+	Color execute() {
+		return null;
+	}
 }

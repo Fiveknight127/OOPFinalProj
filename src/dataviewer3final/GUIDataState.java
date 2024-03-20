@@ -17,6 +17,7 @@ public class GUIDataState extends GUIState {
     private final static double		TEMPERATURE_MAX_C = 30.0;
     private final static double		TEMPERATURE_MIN_C = -10.0;
     private final static double		TEMPERATURE_RANGE = TEMPERATURE_MAX_C - TEMPERATURE_MIN_C;
+    private VisualizationStrategy strategy;
 
 
     public GUIDataState(DataViewer dataViewer){

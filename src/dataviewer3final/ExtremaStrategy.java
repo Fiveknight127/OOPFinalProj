@@ -2,7 +2,7 @@ package dataviewer3final;
 
 import java.awt.Color;
 
-public class ExtremaStrategy implements VisualizationStrategy{
+public class ExtremaStrategy extends VisualizationStrategy{
 
 	@Override
 	public Color execute() {
