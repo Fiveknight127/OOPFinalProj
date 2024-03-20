@@ -17,7 +17,6 @@ public class DataViewer {
 //    private final static String 	DEFAULT_COUNTRY = "United States";
 //    private final static boolean	DO_DEBUG = true;
 //    private final static boolean	DO_TRACE = false;
-
 //    private final static int 		FILE_COUNTRY_IDX = 4;
 //    private final static int 		FILE_DATE_IDX = 0;
 //    private final static int 		FILE_NUM_COLUMNS = 5;
