@@ -17,6 +17,9 @@ public class GUIDataState extends GUIState {
     private final static double		TEMPERATURE_MAX_C = 30.0;
     private final static double		TEMPERATURE_MIN_C = -10.0;
     private final static double		TEMPERATURE_RANGE = TEMPERATURE_MAX_C - TEMPERATURE_MIN_C;
+    private boolean extremaVisualization = false;
+    
+    
     private VisualizationStrategy strategy;
 
 
@@ -51,12 +54,17 @@ public class GUIDataState extends GUIState {
         double cellHeight = window.getCanvasHeight()/nRows;
 
         //debug("cellWidth = %f, cellHeight = %f", cellWidth, cellHeight);
-
-        boolean extremaVisualization = super.dataViewer.getM_selectedVisualization().equals(dataViewer.getVisualizationModes()[VISUALIZATION_EXTREMA_IDX]);
+        if(strategy instanceof ExtremaStrategy) {
+        	extremaVisualization = true;
+        } else {
+        	extremaVisualization = false;
+        }
+//        boolean extremaVisualization = super.dataViewer.getM_selectedVisualization().equals(dataViewer.getVisualizationModes()[VISUALIZATION_EXTREMA_IDX]);
         //info("visualization: %s (extrema == %b)", super.dataViewer.getM_selectedVisualization(), extremaVisualization);
 
         for(int month = 1; month <= 12; month++) {
             double fullRange = dataViewer.getM_plotMonthlyMaxValue().get(month) - dataViewer.getM_plotMonthlyMinValue().get(month);
+            
             double extremaMinBound = dataViewer.getM_plotMonthlyMinValue().get(month) + EXTREMA_PCT * fullRange;
             double extremaMaxBound = dataViewer.getM_plotMonthlyMaxValue().get(month) - EXTREMA_PCT * fullRange;
 
