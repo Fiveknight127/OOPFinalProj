@@ -7,7 +7,7 @@ import javax.swing.*;
 import java.io.FileNotFoundException;
 
 
-public class DataViewerHUD implements DrawListener {
+public class DataViewerHUD extends DataObserver implements DrawListener {
 
     private final static boolean	DO_DEBUG = true;
     private final static boolean	DO_TRACE = false;
@@ -22,11 +22,10 @@ public class DataViewerHUD implements DrawListener {
 
 
     public DataViewerHUD(DataViewer dv) throws FileNotFoundException {
+    	
+    	super(dv); 
 
-        //this.dataViewer = new DataViewer(String dataFile);
-        this.dataViewer = dv;
-        //this.dataViewer = new DataViewer(dataFile);
-        this.GUIState = new GUIMainMenuState(this.dataViewer);
+        this.GUIState = new GUIMainMenuState(this.dv);
 
         // Setup the DuDraw board
         window = new Draw(WINDOW_TITLE);
@@ -41,10 +40,16 @@ public class DataViewerHUD implements DrawListener {
 
     @Override
     public void update() {
-        this.GUIState.drawState(this.window);
-        this.window.show();
+        updateObserver(); 
 
     }
+    
+	@Override
+	public void updateObserver() {
+		this.GUIState.drawState(this.window);
+        this.window.show();
+		
+	}
 
 
 
@@ -111,28 +116,30 @@ public class DataViewerHUD implements DrawListener {
             if(key == 'P') {
                 // plot the data
                 //m_guiMode = GUI_MODE_DATA; OLD
-                GUIState = new GUIDataState(dataViewer);
-                if(dataViewer.getM_plotData() == null) {
+                GUIState = new GUIDataState(dv);
+                if(dv.getM_plotData() == null) {
                     // first time going to render data need to generate the plot data
                     needsUpdatePlotData = true;
                 }
                 needsUpdate = true;
+                update(); 
             }
             else if(key == 'C') {
                 // set the Country
                 Object selectedValue = JOptionPane.showInputDialog(null,
                         "Choose a Country", "Input",
                         JOptionPane.INFORMATION_MESSAGE, null,
-                        dataViewer.getM_dataCountries().toArray(), dataViewer.getM_selectedCountry());
+                        dv.getM_dataCountries().toArray(), dv.getM_selectedCountry());
+                		update();
 
                 if(selectedValue != null) {
                     info("User selected: '%s'", selectedValue);
-                    if(!selectedValue.equals(dataViewer.getM_selectedCountry())) {
+                    if(!selectedValue.equals(dv.getM_selectedCountry())) {
                         // change in data
                         //m_selectedCountry = (String)selectedValue;
-                        dataViewer.setM_selectedCountry((String) selectedValue);
+                        dv.setM_selectedCountry((String) selectedValue);
 //                        try {
-                        dataViewer.loadData();
+                        dv.loadData();
 //                        }
 //                        catch(FileNotFoundException e) {
 //                            // convert to a runtime exception since
@@ -141,6 +148,7 @@ public class DataViewerHUD implements DrawListener {
 //                        }
                         needsUpdate = true;
                         needsUpdatePlotData = true;
+                        update(); 
                     }
                 }
             }
@@ -150,16 +158,17 @@ public class DataViewerHUD implements DrawListener {
                 Object selectedValue = JOptionPane.showInputDialog(null,
                         "Choose a State", "Input",
                         JOptionPane.INFORMATION_MESSAGE, null,
-                        dataViewer.getM_dataStates().toArray(), dataViewer.getM_selectedState());
+                        dv.getM_dataStates().toArray(), dv.getM_selectedState());
 
                 if(selectedValue != null) {
                     info("User selected: '%s'", selectedValue);
-                    if(!selectedValue.equals(dataViewer.getM_selectedState())) {
+                    if(!selectedValue.equals(dv.getM_selectedState())) {
                         // change in data
                         //m_selectedState = (String)selectedValue;
-                        dataViewer.setM_selectedState((String)selectedValue);
+                        dv.setM_selectedState((String)selectedValue);
                         needsUpdate = true;
                         needsUpdatePlotData = true;
+                        update();
                     }
                 }
             }
@@ -168,20 +177,21 @@ public class DataViewerHUD implements DrawListener {
                 Object selectedValue = JOptionPane.showInputDialog(null,
                         "Choose the start year", "Input",
                         JOptionPane.INFORMATION_MESSAGE, null,
-                        dataViewer.getM_dataYears().toArray(), dataViewer.getM_selectedStartYear());
+                        dv.getM_dataYears().toArray(), dv.getM_selectedStartYear());
 
                 if(selectedValue != null) {
                     info("User seleted: '%s'", selectedValue);
                     Integer year = (Integer)selectedValue;
-                    if(year.compareTo(dataViewer.getM_selectedEndYear()) > 0) {
-                        error("new start year (%d) must not be after end year (%d)", year, dataViewer.getM_selectedEndYear());
+                    if(year.compareTo(dv.getM_selectedEndYear()) > 0) {
+                        error("new start year (%d) must not be after end year (%d)", year, dv.getM_selectedEndYear());
                     }
                     else {
-                        if(!dataViewer.getM_selectedStartYear().equals(year)) {
+                        if(!dv.getM_selectedStartYear().equals(year)) {
                             //m_selectedStartYear = year;
-                            dataViewer.setM_selectedStartYear(year);
+                            dv.setM_selectedStartYear(year);
                             needsUpdate = true;
                             needsUpdatePlotData = true;
+                            update();
                         }
                     }
                 }
@@ -191,20 +201,21 @@ public class DataViewerHUD implements DrawListener {
                 Object selectedValue = JOptionPane.showInputDialog(null,
                         "Choose the end year", "Input",
                         JOptionPane.INFORMATION_MESSAGE, null,
-                        dataViewer.getM_dataYears().toArray(), dataViewer.getM_selectedEndYear());
+                        dv.getM_dataYears().toArray(), dv.getM_selectedEndYear());
 
                 if(selectedValue != null) {
                     info("User seleted: '%s'", selectedValue);
                     Integer year = (Integer)selectedValue;
-                    if(year.compareTo(dataViewer.getM_selectedStartYear()) < 0) {
-                        error("new end year (%d) must be not be before start year (%d)", year, dataViewer.getM_selectedStartYear());
+                    if(year.compareTo(dv.getM_selectedStartYear()) < 0) {
+                        error("new end year (%d) must be not be before start year (%d)", year, dv.getM_selectedStartYear());
                     }
                     else {
-                        if(!dataViewer.getM_selectedEndYear().equals(year)) {
+                        if(!dv.getM_selectedEndYear().equals(year)) {
                             //m_selectedEndYear = year;
-                            dataViewer.setM_selectedEndYear(year);
+                            dv.setM_selectedEndYear(year);
                             needsUpdate = true;
                             needsUpdatePlotData = true;
+                            update();
                         }
                     }
                 }
@@ -214,15 +225,16 @@ public class DataViewerHUD implements DrawListener {
                 Object selectedValue = JOptionPane.showInputDialog(null,
                         "Choose the visualization mode", "Input",
                         JOptionPane.INFORMATION_MESSAGE, null,
-                        dataViewer.getVisualizationModes(), dataViewer.getM_selectedVisualization());
+                        dv.getVisualizationModes(), dv.getM_selectedVisualization());
 
                 if(selectedValue != null) {
                     info("User seleted: '%s'", selectedValue);
                     String visualization = (String)selectedValue;
-                    if(!dataViewer.getM_selectedVisualization().equals(visualization)) {
+                    if(!dv.getM_selectedVisualization().equals(visualization)) {
                         //m_selectedVisualization = visualization;
-                        dataViewer.setM_selectedVisualization(visualization);
+                        dv.setM_selectedVisualization(visualization);
                         needsUpdate = true;
+                        update();
                     }
                 }
             }
@@ -231,8 +243,9 @@ public class DataViewerHUD implements DrawListener {
         else if (!GUIState.isMainMenu()) {
             if(key == 'M') {
                 //m_guiMode = GUI_MODE_MAIN_MENU;
-                GUIState = new GUIMainMenuState(dataViewer);
+                GUIState = new GUIMainMenuState(dv);
                 needsUpdate = true;
+                update();
             }
         }
         else {
@@ -240,11 +253,9 @@ public class DataViewerHUD implements DrawListener {
         }
         if(needsUpdatePlotData) {
             // something changed with the data that needs to be plotted
-            dataViewer.updatePlotData();
+            dv.updatePlotData();
         }
-        if(needsUpdate) {
-            update();
-        }
+  
     }
 
 
@@ -286,5 +297,6 @@ public class DataViewerHUD implements DrawListener {
     public void keyReleased(int i) {
 
     }
+
 
 }
