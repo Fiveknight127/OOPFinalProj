@@ -68,7 +68,7 @@ public class GUIDataState extends GUIState {
             double extremaMinBound = dataViewer.getM_plotMonthlyMinValue().get(month) + EXTREMA_PCT * fullRange;
             double extremaMaxBound = dataViewer.getM_plotMonthlyMaxValue().get(month) - EXTREMA_PCT * fullRange;
 
-
+            
             // draw the line separating the months and the month label
             window.setPenColor(Color.BLACK);
             double lineX = (month-1.0)*cellWidth;
