@@ -11,7 +11,7 @@ import java.util.SortedSet;
 import java.util.TreeMap;
 //import java.util.TreeSet;
 
-import life5observer.GameOfLifeUI;
+
 
 public class DataViewer {
 

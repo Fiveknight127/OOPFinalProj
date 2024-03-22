@@ -17,15 +17,18 @@ public class DataViewerHUD extends DataObserver implements DrawListener {
 
     private Draw window;
     private dataviewer3final.GUIState GUIState;
-    private DataViewer dataViewer;
+//    private DataViewer dataViewer;
 
+    
+    boolean needsUpdate;
+    boolean needsUpdatePlotData;//
 
 
     public DataViewerHUD(DataViewer dv) throws FileNotFoundException {
     	
     	super(dv); 
 
-        this.GUIState = new GUIMainMenuState(this.dv);
+        this.GUIState = new GUIMainMenuState(this.dataViewer);
 
         // Setup the DuDraw board
         window = new Draw(WINDOW_TITLE);
@@ -60,7 +63,7 @@ public class DataViewerHUD extends DataObserver implements DrawListener {
      *
      * Output is shown based on the M_DO_TRACE constant.
      */
-    private void trace(String format, Object...args) {
+    public void trace(String format, Object...args) {
         if(DO_TRACE) {
             System.out.print("TRACE: ");
             System.out.println(String.format(format, args));
@@ -72,7 +75,7 @@ public class DataViewerHUD extends DataObserver implements DrawListener {
      * @param format
      * @param args
      */
-    private void info(String format, Object... args) {
+    public void info(String format, Object... args) {
         System.out.print("INFO: ");
         System.out.println(String.format(format, args));
     }
@@ -82,7 +85,7 @@ public class DataViewerHUD extends DataObserver implements DrawListener {
      * @param format
      * @param args
      */
-    private void error(String format, Object... args) {
+    public void error(String format, Object... args) {
         System.out.print("ERROR: ");
         System.out.println(String.format(format, args));
     }
@@ -92,7 +95,7 @@ public class DataViewerHUD extends DataObserver implements DrawListener {
      * @param format
      * @param args
      */
-    private void debug(String format, Object... args) {
+    public void debug(String format, Object... args) {
         if(DO_DEBUG) {
             System.out.print("DEBUG: ");
             System.out.println(String.format(format, args));
@@ -104,148 +107,60 @@ public class DataViewerHUD extends DataObserver implements DrawListener {
 
     @Override
     public void keyPressed(int key) {
-        boolean needsUpdate = false;
-        boolean needsUpdatePlotData = false;
+    	needsUpdate = false;
+        needsUpdatePlotData = false;
+        //reset update booleans 
+        
         trace("key pressed '%c'", (char)key);
+        
         // regardless of draw mode, 'Q' or 'q' means quit:
         if(key == 'Q') {
-            System.out.println("Bye");
-            System.exit(0);
+        	QuitCommand quitCommand = new QuitCommand(dataViewer, this);
+        	quitCommand.execute(); //should I add list?, check first functionality
+        	
         }
         else if(GUIState.isMainMenu()) {
             if(key == 'P') {
                 // plot the data
-                //m_guiMode = GUI_MODE_DATA; OLD
-                GUIState = new GUIDataState(dv);
-                if(dv.getM_plotData() == null) {
-                    // first time going to render data need to generate the plot data
-                    needsUpdatePlotData = true;
-                }
-                needsUpdate = true;
-                update(); 
+            	PlotDataCommand plotDataCommand = new PlotDataCommand(dataViewer, this, GUIState);
+            	plotDataCommand.execute();
+            	
+
+
             }
             else if(key == 'C') {
                 // set the Country
-                Object selectedValue = JOptionPane.showInputDialog(null,
-                        "Choose a Country", "Input",
-                        JOptionPane.INFORMATION_MESSAGE, null,
-                        dv.getM_dataCountries().toArray(), dv.getM_selectedCountry());
-                		update();
-
-                if(selectedValue != null) {
-                    info("User selected: '%s'", selectedValue);
-                    if(!selectedValue.equals(dv.getM_selectedCountry())) {
-                        // change in data
-                        //m_selectedCountry = (String)selectedValue;
-                        dv.setM_selectedCountry((String) selectedValue);
-//                        try {
-                        dv.loadData();
-//                        }
-//                        catch(FileNotFoundException e) {
-//                            // convert to a runtime exception since
-//                            // we can't add throws to this method
-//                            throw new RuntimeException(e);
-//                        }
-                        needsUpdate = true;
-                        needsUpdatePlotData = true;
-                        update(); 
+                SetCountryCommand setCountryCommand = new SetCountryCommand(dataViewer, this);
+            	setCountryCommand.execute();
                     }
-                }
-            }
+
 
             else if(key == 'T') {
                 // set the state
-                Object selectedValue = JOptionPane.showInputDialog(null,
-                        "Choose a State", "Input",
-                        JOptionPane.INFORMATION_MESSAGE, null,
-                        dv.getM_dataStates().toArray(), dv.getM_selectedState());
-
-                if(selectedValue != null) {
-                    info("User selected: '%s'", selectedValue);
-                    if(!selectedValue.equals(dv.getM_selectedState())) {
-                        // change in data
-                        //m_selectedState = (String)selectedValue;
-                        dv.setM_selectedState((String)selectedValue);
-                        needsUpdate = true;
-                        needsUpdatePlotData = true;
-                        update();
-                    }
-                }
+                SetStateCommand setStateCommand = new SetStateCommand(dataViewer, this);
+                setStateCommand.execute();
             }
             else if(key == 'S') {
                 // set the start year
-                Object selectedValue = JOptionPane.showInputDialog(null,
-                        "Choose the start year", "Input",
-                        JOptionPane.INFORMATION_MESSAGE, null,
-                        dv.getM_dataYears().toArray(), dv.getM_selectedStartYear());
-
-                if(selectedValue != null) {
-                    info("User seleted: '%s'", selectedValue);
-                    Integer year = (Integer)selectedValue;
-                    if(year.compareTo(dv.getM_selectedEndYear()) > 0) {
-                        error("new start year (%d) must not be after end year (%d)", year, dv.getM_selectedEndYear());
-                    }
-                    else {
-                        if(!dv.getM_selectedStartYear().equals(year)) {
-                            //m_selectedStartYear = year;
-                            dv.setM_selectedStartYear(year);
-                            needsUpdate = true;
-                            needsUpdatePlotData = true;
-                            update();
-                        }
-                    }
-                }
+                SetStartYearCommand setStartYearCommand = new SetStartYearCommand(dataViewer,this);
+                setStartYearCommand.execute();
             }
             else if(key == 'E') {
                 // set the end year
-                Object selectedValue = JOptionPane.showInputDialog(null,
-                        "Choose the end year", "Input",
-                        JOptionPane.INFORMATION_MESSAGE, null,
-                        dv.getM_dataYears().toArray(), dv.getM_selectedEndYear());
-
-                if(selectedValue != null) {
-                    info("User seleted: '%s'", selectedValue);
-                    Integer year = (Integer)selectedValue;
-                    if(year.compareTo(dv.getM_selectedStartYear()) < 0) {
-                        error("new end year (%d) must be not be before start year (%d)", year, dv.getM_selectedStartYear());
-                    }
-                    else {
-                        if(!dv.getM_selectedEndYear().equals(year)) {
-                            //m_selectedEndYear = year;
-                            dv.setM_selectedEndYear(year);
-                            needsUpdate = true;
-                            needsUpdatePlotData = true;
-                            update();
-                        }
-                    }
-                }
+            	SetEndYearCommand setEndYearCommand = new SetEndYearCommand(dataViewer,this);
+                setEndYearCommand.execute();
             }
             else if(key == 'V') {
                 // set the visualization
-                Object selectedValue = JOptionPane.showInputDialog(null,
-                        "Choose the visualization mode", "Input",
-                        JOptionPane.INFORMATION_MESSAGE, null,
-                        dv.getVisualizationModes(), dv.getM_selectedVisualization());
-
-                if(selectedValue != null) {
-                    info("User seleted: '%s'", selectedValue);
-                    String visualization = (String)selectedValue;
-                    if(!dv.getM_selectedVisualization().equals(visualization)) {
-                        //m_selectedVisualization = visualization;
-                        dv.setM_selectedVisualization(visualization);
-                        needsUpdate = true;
-                        update();
-                    }
-                }
+            	SetVisualizationCommand setVisualizationCommand = new SetVisualizationCommand(dataViewer,this);
+                setVisualizationCommand.execute();
             }
 
         }
         else if (!GUIState.isMainMenu()) {
             if(key == 'M') {
-                //m_guiMode = GUI_MODE_MAIN_MENU;
-                GUIState = new GUIMainMenuState(dv);
-                needsUpdate = true;
-                update();
+            	MainMenuCommand mainMenuCommand = new MainMenuCommand(dataViewer,this, GUIState);
+            	mainMenuCommand.execute();
             }
         }
         else {
@@ -253,14 +168,19 @@ public class DataViewerHUD extends DataObserver implements DrawListener {
         }
         if(needsUpdatePlotData) {
             // something changed with the data that needs to be plotted
-            dv.updatePlotData();
+            dataViewer.updatePlotData();
+        }
+        if(needsUpdate) {
+            update();
         }
   
     }
 
 
-
-
+    // setter for changing GUIState
+    public void setGUIState(GUIState gs) {
+    	GUIState = gs;
+    }
 
 
 

@@ -1,10 +1,10 @@
 package dataviewer3final;
 
 public abstract class DataObserver {
-	public DataViewer dv; 
+	public DataViewer dataViewer; 
 	
 	public DataObserver(DataViewer subject) {
-		this.dv = subject; 
+		this.dataViewer = subject; 
 	}
 	
 	public abstract void updateObserver();
