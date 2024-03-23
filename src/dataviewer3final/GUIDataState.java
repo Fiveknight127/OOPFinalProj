@@ -23,13 +23,11 @@ public class GUIDataState extends GUIState {
     private final static double		TEMPERATURE_MIN_C = -10.0;
     private final static double		TEMPERATURE_RANGE = TEMPERATURE_MAX_C - TEMPERATURE_MIN_C;
     
-	private boolean extremaVisualization = false;
     private VisualizationStrategy strategy;
+	private boolean extremaVisualization = false;
     extremaVisualization = strategy.execute();
 
     
-
-
 
     public GUIDataState(DataViewer dataViewer){
         super(dataViewer);
