@@ -1,15 +1,15 @@
 package dataviewer3final;
 import java.awt.Color;
 
-public class RawStrategy {
+public class RawStrategy extends VisualizationStrategy{
 
     private boolean extremaVisualization = false;
     
-	public RawStrategy() {
-		
+	public RawStrategy(double value) {
+    	super(value);
 	}
 
-	public boolean execute() {
+	public Color execute() {
 		return ExtremaStrategy.getDataColor(value, false);
 		
 //			extremaVisualization = false;

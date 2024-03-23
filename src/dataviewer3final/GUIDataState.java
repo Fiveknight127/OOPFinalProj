@@ -58,7 +58,7 @@ public class GUIDataState extends GUIState {
 
         double cellWidth = window.getCanvasWidth()/nCols;
         double cellHeight = window.getCanvasHeight()/nRows;
-        
+
 
 
         //debug("cellWidth = %f, cellHeight = %f", cellWidth, cellHeight);
