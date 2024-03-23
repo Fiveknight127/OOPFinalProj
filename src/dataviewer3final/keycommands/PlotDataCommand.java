@@ -1,9 +1,15 @@
-package dataviewer3final;
+package dataviewer3final.keycommands;
 
 
-public class PlotDataCommand extends KeyCommand{
+import dataviewer3final.DataViewer;
+import dataviewer3final.DataViewerHUD;
+import dataviewer3final.GUIDataState;
+import dataviewer3final.GUIState;
+import dataviewer3final.keycommands.KeyCommand;
 
-	protected GUIState GUIState;
+public class PlotDataCommand extends KeyCommand {
+
+	protected dataviewer3final.GUIState GUIState;
 	
 	public PlotDataCommand(DataViewer dV, DataViewerHUD dvHUD, GUIState gs) {
 		super(dV, dvHUD);
@@ -17,9 +23,9 @@ public class PlotDataCommand extends KeyCommand{
         
         if(dataViewer.getM_plotData() == null) {
             // first time going to render data need to generate the plot data
-            dataViewerHUD.needsUpdatePlotData = true;
+			this.dataViewerHUD.setNeedsUpdatePlotData(true);
         }
-        dataViewerHUD.needsUpdate = true;
+		this.dataViewerHUD.setNeedsUpdate(true);
 	}
 	
 }

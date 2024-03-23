@@ -1,8 +1,13 @@
-package dataviewer3final;
+package dataviewer3final.keycommands;
+
+import dataviewer3final.DataViewer;
+import dataviewer3final.DataViewerHUD;
+import dataviewer3final.StaticDebuggingStatements;
+import dataviewer3final.keycommands.KeyCommand;
 
 import javax.swing.JOptionPane;
 
-public class SetStartYearCommand extends KeyCommand{
+public class SetStartYearCommand extends KeyCommand {
 
 	public SetStartYearCommand(DataViewer dV, DataViewerHUD dvHUD) {
 		super(dV, dvHUD);
@@ -16,17 +21,17 @@ public class SetStartYearCommand extends KeyCommand{
                 dataViewer.getM_dataYears().toArray(), dataViewer.getM_selectedStartYear());
 
         if(selectedValue != null) {
-        	dataViewerHUD.info("User seleted: '%s'", selectedValue);
+            StaticDebuggingStatements.info("User seleted: '%s'", selectedValue);
             Integer year = (Integer)selectedValue;
             if(year.compareTo(dataViewer.getM_selectedEndYear()) > 0) {
-            	dataViewerHUD.error("new start year (%d) must not be after end year (%d)", year, dataViewer.getM_selectedEndYear());
+                StaticDebuggingStatements.error("new start year (%d) must not be after end year (%d)", year, dataViewer.getM_selectedEndYear());
             }
             else {
                 if(!dataViewer.getM_selectedStartYear().equals(year)) {
                     //m_selectedStartYear = year;
                     dataViewer.setM_selectedStartYear(year);
-                    dataViewerHUD.needsUpdate = true;
-                    dataViewerHUD.needsUpdatePlotData = true;
+                    this.dataViewerHUD.setNeedsUpdate(true);
+                    this.dataViewerHUD.setNeedsUpdatePlotData(true);
                 }
             }
         }
