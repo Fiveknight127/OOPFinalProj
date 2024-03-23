@@ -59,15 +59,7 @@ public class GUIDataState extends GUIState {
         double cellWidth = window.getCanvasWidth()/nCols;
         double cellHeight = window.getCanvasHeight()/nRows;
         
-        if(this.dataViewer.getM_selectedVisualization().equals("raw")){
-            this.strategy = new RawStrategy(cellHeight);
-        }
-        else if(this.dataViewer.getM_selectedVisualization().equals("Extrema (within 10% of min/max)")){
-            this.strategy = new ExtremaStrategy(cellHeight, cellHeight, cellHeight);
-
-        }
-        this.strategy.execute();
-
+        
         //debug("cellWidth = %f, cellHeight = %f", cellWidth, cellHeight);
 //        if(strategy instanceof ExtremaStrategy) {
 //        	extremaVisualization = true;
@@ -105,21 +97,30 @@ public class GUIDataState extends GUIState {
                     Color cellColor = null;
 
                     // get either color or grayscale depending on visualization mode
-                    if(extremaVisualization && value > extremaMinBound && value < extremaMaxBound) {
-                        cellColor = ExtremaStrategy.getDataColor(value, true);
+//                    if(extremaVisualization && value > extremaMinBound && value < extremaMaxBound) {
+//                        cellColor = ExtremaStrategy.getDataColor(value, true);
+//                    }
+//                    else if(extremaVisualization) {
+//                        // doing extrema visualization, show "high" values in red "low" values in blue.
+//                        if(value >= extremaMaxBound) {
+//                            cellColor = Color.RED;
+//                        }
+//                        else {
+//                            cellColor = Color.BLUE;
+//                        }
+//                    }
+//                    else {
+//                        cellColor = ExtremaStrategy.getDataColor(value, false);
+//                    }
+                    if(this.dataViewer.getM_selectedVisualization().equals("raw")){
+                        this.strategy = new RawStrategy(cellHeight);
                     }
-                    else if(extremaVisualization) {
-                        // doing extrema visualization, show "high" values in red "low" values in blue.
-                        if(value >= extremaMaxBound) {
-                            cellColor = Color.RED;
-                        }
-                        else {
-                            cellColor = Color.BLUE;
-                        }
+                    else if(this.dataViewer.getM_selectedVisualization().equals("Extrema (within 10% of min/max)")){
+                        this.strategy = new ExtremaStrategy(cellHeight, cellHeight, cellHeight);
+
                     }
-                    else {
-                        cellColor = ExtremaStrategy.getDataColor(value, false);
-                    }
+                    this.strategy.execute();
+
 
                     // draw the rectangle for this data point
                     window.setPenColor(cellColor);
