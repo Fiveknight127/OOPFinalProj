@@ -72,7 +72,7 @@ public class DataViewer {
     }
 
     public void updatePlotData() {
-        //debug("raw data: %s", m_rawData.toString());
+        //StaticDebuggingStatements.debug("raw data: %s", m_rawData.toString());
         // plot data is a map where the key is the Month, and the value is a sorted map where the key
         // is the year.
         m_plotData = new TreeMap<Integer,SortedMap<Integer,Double>>();
@@ -112,7 +112,7 @@ public class DataViewer {
                 m_plotData.get(month).put(year, value);
             }
         }
-        //debug("plot data: %s", m_plotData.toString());
+        //StaticDebuggingStatements.debug("plot data: %s", m_plotData.toString());
         
         notifyObservers();
     }

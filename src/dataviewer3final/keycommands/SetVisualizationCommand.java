@@ -1,8 +1,13 @@
-package dataviewer3final;
+package dataviewer3final.keycommands;
+
+import dataviewer3final.DataViewer;
+import dataviewer3final.DataViewerHUD;
+import dataviewer3final.StaticDebuggingStatements;
+import dataviewer3final.keycommands.KeyCommand;
 
 import javax.swing.JOptionPane;
 
-public class SetVisualizationCommand extends KeyCommand{
+public class SetVisualizationCommand extends KeyCommand {
 
 	public SetVisualizationCommand(DataViewer dV, DataViewerHUD dvHUD) {
 		super(dV, dvHUD);
@@ -16,12 +21,12 @@ public class SetVisualizationCommand extends KeyCommand{
                 dataViewer.getVisualizationModes(), dataViewer.getM_selectedVisualization());
 
         if(selectedValue != null) {
-        	dataViewerHUD.info("User seleted: '%s'", selectedValue);
+            StaticDebuggingStatements.info("User seleted: '%s'", selectedValue);
             String visualization = (String)selectedValue;
             if(!dataViewer.getM_selectedVisualization().equals(visualization)) {
                 //m_selectedVisualization = visualization;
                 dataViewer.setM_selectedVisualization(visualization);
-                dataViewerHUD.needsUpdate = true;
+                dataViewerHUD.setNeedsUpdate(true);
             }
         }
 	}

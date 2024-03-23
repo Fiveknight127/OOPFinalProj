@@ -1,16 +1,15 @@
 package dataviewer3final;
 
+import dataviewer3final.keycommands.*;
 import edu.du.dudraw.Draw;
 import edu.du.dudraw.DrawListener;
 
-import javax.swing.*;
 import java.io.FileNotFoundException;
 
 
 public class DataViewerHUD extends DataObserver implements DrawListener {
 
-    private final static boolean	DO_DEBUG = true;
-    private final static boolean	DO_TRACE = false;
+
     private final static int 		WINDOW_HEIGHT = 720;
     private final static String 	WINDOW_TITLE = "DataViewer Application";
     private final static int 		WINDOW_WIDTH = 1320; // should be a multiple of 12
@@ -58,61 +57,13 @@ public class DataViewerHUD extends DataObserver implements DrawListener {
 
 
 
-    //HELPER COMMANDS
-    /**
-     * For debugging.  Use 'trace' for older debugging messages that you don't want to see.
-     *
-     * Output is shown based on the M_DO_TRACE constant.
-     */
-    public void trace(String format, Object...args) {
-        if(DO_TRACE) {
-            System.out.print("TRACE: ");
-            System.out.println(String.format(format, args));
-        }
-    }
-
-    /**
-     * For informational output.
-     * @param format
-     * @param args
-     */
-    public void info(String format, Object... args) {
-        System.out.print("INFO: ");
-        System.out.println(String.format(format, args));
-    }
-
-    /**
-     * For error output.
-     * @param format
-     * @param args
-     */
-    public void error(String format, Object... args) {
-        System.out.print("ERROR: ");
-        System.out.println(String.format(format, args));
-    }
-
-    /**
-     * For debugging output.  Output is controlled by the DO_DEBUG constant.
-     * @param format
-     * @param args
-     */
-    public void debug(String format, Object... args) {
-        if(DO_DEBUG) {
-            System.out.print("DEBUG: ");
-            System.out.println(String.format(format, args));
-        }
-    }
-
-
-
-
     @Override
     public void keyPressed(int key) {
     	needsUpdate = false;
         needsUpdatePlotData = false;
         //reset update booleans 
         
-        trace("key pressed '%c'", (char)key);
+        StaticDebuggingStatements.trace("key pressed '%c'", (char)key);
         
         // regardless of draw mode, 'Q' or 'q' means quit:
         if(key == 'Q') {
@@ -183,10 +134,13 @@ public class DataViewerHUD extends DataObserver implements DrawListener {
     	GUIState = gs;
     }
 
+    public void setNeedsUpdate(boolean needsUpdate) {
+        this.needsUpdate = needsUpdate;
+    }
 
-
-
-
+    public void setNeedsUpdatePlotData(boolean needsUpdatePlotData) {
+        this.needsUpdatePlotData = needsUpdatePlotData;
+    }
 
     //TODO LEAVE UNSORTED
     @Override

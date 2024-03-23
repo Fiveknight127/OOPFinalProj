@@ -1,4 +1,7 @@
-package dataviewer3final;
+package dataviewer3final.keycommands;
+
+import dataviewer3final.DataViewer;
+import dataviewer3final.DataViewerHUD;
 
 public abstract class KeyCommand {
 

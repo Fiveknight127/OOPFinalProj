@@ -1,8 +1,13 @@
-package dataviewer3final;
+package dataviewer3final.keycommands;
+
+import dataviewer3final.DataViewer;
+import dataviewer3final.DataViewerHUD;
+import dataviewer3final.StaticDebuggingStatements;
+import dataviewer3final.keycommands.KeyCommand;
 
 import javax.swing.JOptionPane;
 
-public class SetCountryCommand extends KeyCommand{
+public class SetCountryCommand extends KeyCommand {
 
 	public SetCountryCommand(DataViewer dV, DataViewerHUD dvHUD) {
 		super(dV, dvHUD);
@@ -16,7 +21,7 @@ public class SetCountryCommand extends KeyCommand{
                 dataViewer.getM_dataCountries().toArray(), dataViewer.getM_selectedCountry());
 
         if(selectedValue != null) {
-        	dataViewerHUD.info("User selected: '%s'", selectedValue);
+            StaticDebuggingStatements.info("User selected: '%s'", selectedValue);
             if(!selectedValue.equals(dataViewer.getM_selectedCountry())) {
                 // change in data
                 //m_selectedCountry = (String)selectedValue;
@@ -29,8 +34,8 @@ public class SetCountryCommand extends KeyCommand{
 //                    // we can't add throws to this method
 //                    throw new RuntimeException(e);
 //                }
-                dataViewerHUD.needsUpdate = true;
-                dataViewerHUD.needsUpdatePlotData = true;
+                dataViewerHUD.setNeedsUpdate(true);
+                dataViewerHUD.setNeedsUpdatePlotData(true);
             }
         }
 	}

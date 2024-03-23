@@ -17,15 +17,15 @@ public class GUIDataState extends GUIState {
 //    private final static double		TEMPERATURE_MAX_C = 30.0;
 //    private final static double		TEMPERATURE_MIN_C = -10.0;
 //    private final static double		TEMPERATURE_RANGE = TEMPERATURE_MAX_C - TEMPERATURE_MIN_C;
-    
-    
+
+
     private final static double		TEMPERATURE_MAX_C = 30.0;
     private final static double		TEMPERATURE_MIN_C = -10.0;
     private final static double		TEMPERATURE_RANGE = TEMPERATURE_MAX_C - TEMPERATURE_MIN_C;
-    
+
     private VisualizationStrategy strategy;
 
-    
+
 
     public GUIDataState(DataViewer dataViewer){
         super(dataViewer);
@@ -51,29 +51,33 @@ public class GUIDataState extends GUIState {
         double nCols = 12; // one for each month
         double nRows = super.dataViewer.getM_selectedEndYear() - super.dataViewer.getM_selectedStartYear() + 1; // for the years
 
-        //debug("nCols = %f, nRows = %f", nCols, nRows);
+        StaticDebuggingStatements.debug("nCols = %f, nRows = %f", nCols, nRows);
 
 
         double cellWidth = window.getCanvasWidth()/nCols;
         double cellHeight = window.getCanvasHeight()/nRows;
-        
-        
-        //debug("cellWidth = %f, cellHeight = %f", cellWidth, cellHeight);
+
+
+        StaticDebuggingStatements.debug("cellWidth = %f, cellHeight = %f", cellWidth, cellHeight);
 //        if(strategy instanceof ExtremaStrategy) {
 //        	extremaVisualization = true;
 //        } else {
 //        	extremaVisualization = false;
 //        }
 //        boolean extremaVisualization = super.dataViewer.getM_selectedVisualization().equals(dataViewer.getVisualizationModes()[VISUALIZATION_EXTREMA_IDX]);
-        //info("visualization: %s (extrema == %b)", super.dataViewer.getM_selectedVisualization(), extremaVisualization);
+
+
+
+        boolean extremaVisualization = super.dataViewer.getM_selectedVisualization().equals(dataViewer.getVisualizationModes()[VISUALIZATION_EXTREMA_IDX]);
+        ///ADDED
 
         for(int month = 1; month <= 12; month++) {
             double fullRange = dataViewer.getM_plotMonthlyMaxValue().get(month) - dataViewer.getM_plotMonthlyMinValue().get(month);
-            
+
             double extremaMinBound = dataViewer.getM_plotMonthlyMinValue().get(month) + EXTREMA_PCT * fullRange;
             double extremaMaxBound = dataViewer.getM_plotMonthlyMaxValue().get(month) - EXTREMA_PCT * fullRange;
 
-            
+
             // draw the line separating the months and the month label
             window.setPenColor(Color.BLACK);
             double lineX = (month-1.0)*cellWidth;
@@ -96,19 +100,22 @@ public class GUIDataState extends GUIState {
 
                     // get either color or grayscale depending on visualization mode
 
-                    if(this.dataViewer.getM_selectedVisualization().equals("raw")){
+                    if(!extremaVisualization){
+
                         this.strategy = new RawStrategy(value);
+                        cellColor = this.strategy.execute();
                     }
-                    else if(this.dataViewer.getM_selectedVisualization().equals("Extrema (within 10% of min/max)")){
+                    else if(extremaVisualization) {
                         this.strategy = new ExtremaStrategy(value, extremaMinBound, extremaMaxBound);
+                        cellColor = this.strategy.execute();
 
                     }
-                    this.strategy.execute();
+
 
 
                     // draw the rectangle for this data point
                     window.setPenColor(cellColor);
-                    //trace("month = %d, year = %d -> (%f, %f) with %s", month, year, x, y, cellColor.toString());
+                    StaticDebuggingStatements.trace("month = %d, year = %d -> (%f, %f) with %s", month, year, x, y, cellColor.toString());
                     window.filledRectangle(x, y, cellWidth/2.0, cellHeight/2.0);
                 }
             }

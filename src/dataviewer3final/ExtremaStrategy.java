@@ -44,7 +44,7 @@ public class ExtremaStrategy extends VisualizationStrategy{
             return null;
         }
         double pct = (value - TEMPERATURE_MIN_C) / TEMPERATURE_RANGE;
-        //trace("converted %f raw value to %f %%", value, pct);
+        StaticDebuggingStatements.trace("converted %f raw value to %f %%", value, pct);
 
         if (pct > 1.0) {
             pct = 1.0;
