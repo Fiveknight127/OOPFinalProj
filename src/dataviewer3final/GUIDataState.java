@@ -14,16 +14,27 @@ public class GUIDataState extends GUIState {
     private final static double 	EXTREMA_PCT = 0.1;
     private final static String[] 	MONTH_NAMES = { "", // 1-based
             "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec" };
+<<<<<<< HEAD
 //    private final static double		TEMPERATURE_MAX_C = 30.0;
 //    private final static double		TEMPERATURE_MIN_C = -10.0;
 //    private final static double		TEMPERATURE_RANGE = TEMPERATURE_MAX_C - TEMPERATURE_MIN_C;
 //<<<<<<< HEAD
+=======
+    private final static double		TEMPERATURE_MAX_C = 30.0;
+    private final static double		TEMPERATURE_MIN_C = -10.0;
+    private final static double		TEMPERATURE_RANGE = TEMPERATURE_MAX_C - TEMPERATURE_MIN_C;
+    private boolean extremaVisualization = false;
+>>>>>>> branch 'main' of https://github.com/Fiveknight127/OOPFinalProj.git
     
     private VisualizationStrategy strategy;
+<<<<<<< HEAD
     
     private boolean extremaVisualization = strategy.execute();
 //=======
 //>>>>>>> branch 'main' of https://github.com/Fiveknight127/OOPFinalProj.git
+=======
+
+>>>>>>> branch 'main' of https://github.com/Fiveknight127/OOPFinalProj.git
 
 
     public GUIDataState(DataViewer dataViewer){
