@@ -9,10 +9,35 @@ public class ExtremaStrategy extends VisualizationStrategy{
     private static double		TEMPERATURE_RANGE = TEMPERATURE_MAX_C - TEMPERATURE_MIN_C;
     private boolean extremaVisualization = false;
 
-
-	public boolean execute() {
-		extremaVisualization = true;
-		return extremaVisualization;
+    
+    double extremaMinBound;
+    double extremaMaxBound;
+    
+    public ExtremaStrategy(Double value, double extremaMinBound, double extremaMaxBound) {
+    	super(value);
+    	this.extremaMinBound = extremaMinBound;
+    	this.extremaMaxBound = extremaMaxBound;
+    }
+    
+    
+	public Color execute() {
+		
+		if(value > extremaMinBound && value < extremaMaxBound) {
+			return ExtremaStrategy.getDataColor(value, true);
+		}
+		else if(value >= extremaMaxBound) {
+            return Color.RED;
+        }
+		else {
+			return Color.BLUE;
+		}
+		
+//		
+//		extremaVisualization = true;
+//		return extremaVisualization;
+//		
+		
+		
 	}
     static Color getDataColor(Double value, boolean doGrayscale) {
         if(null == value) {

@@ -2,11 +2,15 @@ package dataviewer3final;
 import java.awt.Color;
 public class VisualizationStrategy {
 	
+	Double value;
 	
-    private boolean extremaVisualization = false;
+	public VisualizationStrategy(Double value) {
+		this.value= value;
+	}
+	
+
 	    
-		public boolean execute() {
-			extremaVisualization = false;
-			return extremaVisualization;
-		}
+//	public Color execute() {
+//		
+//	}
 	}
