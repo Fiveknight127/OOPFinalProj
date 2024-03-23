@@ -63,7 +63,7 @@ public class GUIDataState extends GUIState {
             this.strategy = new RawStrategy();
         }
         else if(this.dataViewer.getM_selectedVisualization().equals("Extrema (within 10% of min/max)")){
-            this.strategy = new ExtremaStrategy();
+            this.strategy = new ExtremaStrategy(cellHeight, cellHeight, cellHeight);
 
         }
         this.strategy.execute();
