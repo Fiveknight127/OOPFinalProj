@@ -4,9 +4,15 @@ import java.awt.Color;
 public class RawStrategy {
 
     private boolean extremaVisualization = false;
-	    
-		public boolean execute() {
-			extremaVisualization = false;
-			return extremaVisualization;
+    
+	public RawStrategy() {
+		
+	}
+
+	public boolean execute() {
+		return ExtremaStrategy.getDataColor(value, false);
+		
+//			extremaVisualization = false;
+//			return extremaVisualization;
 		}
 	}
