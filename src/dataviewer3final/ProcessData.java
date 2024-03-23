@@ -75,11 +75,11 @@ public class ProcessData {
             m_selectedStartYear = m_dataYears.first();
             m_selectedEndYear = m_dataYears.last();
 
-            System.out.println("TestA");
+            //System.out.println("TestA");
 
-            //info("loaded %d data records", m_dataRaw.size());
-            //info("loaded data for %d states", m_dataStates.size());
-            //info("loaded data for %d years [%d, %d]", m_dataYears.size(), m_selectedStartYear, m_selectedEndYear);
+//            StaticDebuggingStatements.info("loaded %d data records", m_dataRaw.size());
+//            StaticDebuggingStatements.info("loaded data for %d states", m_dataStates.size());
+//            StaticDebuggingStatements.info("loaded data for %d years [%d, %d]", m_dataYears.size(), m_selectedStartYear, m_selectedEndYear);
         }
     }
     

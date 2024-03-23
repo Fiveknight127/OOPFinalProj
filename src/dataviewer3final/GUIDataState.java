@@ -17,13 +17,10 @@ public class GUIDataState extends GUIState {
     private final static double		TEMPERATURE_MAX_C = 30.0;
     private final static double		TEMPERATURE_MIN_C = -10.0;
     private final static double		TEMPERATURE_RANGE = TEMPERATURE_MAX_C - TEMPERATURE_MIN_C;
-//<<<<<<< HEAD
     private boolean extremaVisualization = false;
     
-    
     private VisualizationStrategy strategy;
-//=======
-//>>>>>>> branch 'main' of https://github.com/Fiveknight127/OOPFinalProj.git
+
 
 
     public GUIDataState(DataViewer dataViewer){
