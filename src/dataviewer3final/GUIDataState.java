@@ -60,7 +60,7 @@ public class GUIDataState extends GUIState {
         double cellHeight = window.getCanvasHeight()/nRows;
         
         if(this.dataViewer.getM_selectedVisualization().equals("raw")){
-            this.strategy = new RawStrategy();
+            this.strategy = new RawStrategy(cellHeight);
         }
         else if(this.dataViewer.getM_selectedVisualization().equals("Extrema (within 10% of min/max)")){
             this.strategy = new ExtremaStrategy(cellHeight, cellHeight, cellHeight);
