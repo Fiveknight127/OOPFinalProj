@@ -67,6 +67,10 @@ public class GUIDataState extends GUIState {
 //        boolean extremaVisualization = super.dataViewer.getM_selectedVisualization().equals(dataViewer.getVisualizationModes()[VISUALIZATION_EXTREMA_IDX]);
         //info("visualization: %s (extrema == %b)", super.dataViewer.getM_selectedVisualization(), extremaVisualization);
 
+        
+        boolean extremaVisualization = super.dataViewer.getM_selectedVisualization().equals(dataViewer.getVisualizationModes()[VISUALIZATION_EXTREMA_IDX]);
+        ///ADDED
+        
         for(int month = 1; month <= 12; month++) {
             double fullRange = dataViewer.getM_plotMonthlyMaxValue().get(month) - dataViewer.getM_plotMonthlyMinValue().get(month);
             
@@ -96,14 +100,17 @@ public class GUIDataState extends GUIState {
 
                     // get either color or grayscale depending on visualization mode
 
-                    if(this.dataViewer.getM_selectedVisualization().equals("raw")){
+                    if(extremaVisualization){
+                    
                         this.strategy = new RawStrategy(value);
+                        cellColor = this.strategy.execute();
                     }
-                    else if(this.dataViewer.getM_selectedVisualization().equals("Extrema (within 10% of min/max)")){
+                    else if(!extremaVisualization) {
                         this.strategy = new ExtremaStrategy(value, extremaMinBound, extremaMaxBound);
+                        cellColor = this.strategy.execute();
 
                     }
-                    this.strategy.execute();
+                    
 
 
                     // draw the rectangle for this data point
