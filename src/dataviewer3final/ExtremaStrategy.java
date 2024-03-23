@@ -7,10 +7,12 @@ public class ExtremaStrategy extends VisualizationStrategy{
     private static double		TEMPERATURE_MAX_C = 30.0;
     private static double		TEMPERATURE_MIN_C = -10.0;
     private static double		TEMPERATURE_RANGE = TEMPERATURE_MAX_C - TEMPERATURE_MIN_C;
+    private boolean extremaVisualization = false;
 
-	public Color execute() {
-		// TODO Auto-generated method stub
-		return null;
+
+	public boolean execute() {
+		extremaVisualization = true;
+		return extremaVisualization;
 	}
     static Color getDataColor(Double value, boolean doGrayscale) {
         if(null == value) {

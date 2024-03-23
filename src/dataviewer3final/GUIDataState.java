@@ -14,14 +14,14 @@ public class GUIDataState extends GUIState {
     private final static double 	EXTREMA_PCT = 0.1;
     private final static String[] 	MONTH_NAMES = { "", // 1-based
             "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec" };
-    private final static double		TEMPERATURE_MAX_C = 30.0;
-    private final static double		TEMPERATURE_MIN_C = -10.0;
-    private final static double		TEMPERATURE_RANGE = TEMPERATURE_MAX_C - TEMPERATURE_MIN_C;
+//    private final static double		TEMPERATURE_MAX_C = 30.0;
+//    private final static double		TEMPERATURE_MIN_C = -10.0;
+//    private final static double		TEMPERATURE_RANGE = TEMPERATURE_MAX_C - TEMPERATURE_MIN_C;
 //<<<<<<< HEAD
-    private boolean extremaVisualization = false;
-    
     
     private VisualizationStrategy strategy;
+    
+    private boolean extremaVisualization = strategy.execute();
 //=======
 //>>>>>>> branch 'main' of https://github.com/Fiveknight127/OOPFinalProj.git
 
@@ -57,11 +57,11 @@ public class GUIDataState extends GUIState {
         double cellHeight = window.getCanvasHeight()/nRows;
 
         //debug("cellWidth = %f, cellHeight = %f", cellWidth, cellHeight);
-        if(strategy instanceof ExtremaStrategy) {
-        	extremaVisualization = true;
-        } else {
-        	extremaVisualization = false;
-        }
+//        if(strategy instanceof ExtremaStrategy) {
+//        	extremaVisualization = true;
+//        } else {
+//        	extremaVisualization = false;
+//        }
 //        boolean extremaVisualization = super.dataViewer.getM_selectedVisualization().equals(dataViewer.getVisualizationModes()[VISUALIZATION_EXTREMA_IDX]);
         //info("visualization: %s (extrema == %b)", super.dataViewer.getM_selectedVisualization(), extremaVisualization);
 
