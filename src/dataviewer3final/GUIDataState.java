@@ -24,8 +24,6 @@ public class GUIDataState extends GUIState {
     private final static double		TEMPERATURE_RANGE = TEMPERATURE_MAX_C - TEMPERATURE_MIN_C;
     
     private VisualizationStrategy strategy;
-	private boolean extremaVisualization = false;
-    extremaVisualization = strategy.execute();
 
     
 
@@ -97,21 +95,7 @@ public class GUIDataState extends GUIState {
                     Color cellColor = null;
 
                     // get either color or grayscale depending on visualization mode
-//                    if(extremaVisualization && value > extremaMinBound && value < extremaMaxBound) {
-//                        cellColor = ExtremaStrategy.getDataColor(value, true);
-//                    }
-//                    else if(extremaVisualization) {
-//                        // doing extrema visualization, show "high" values in red "low" values in blue.
-//                        if(value >= extremaMaxBound) {
-//                            cellColor = Color.RED;
-//                        }
-//                        else {
-//                            cellColor = Color.BLUE;
-//                        }
-//                    }
-//                    else {
-//                        cellColor = ExtremaStrategy.getDataColor(value, false);
-//                    }
+
                     if(this.dataViewer.getM_selectedVisualization().equals("raw")){
                         this.strategy = new RawStrategy(cellHeight);
                     }
