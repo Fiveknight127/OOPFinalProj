@@ -11,28 +11,20 @@ import java.util.SortedSet;
 import java.util.TreeMap;
 //import java.util.TreeSet;
 
-public class DataViewer {
-    // Private constants (alphabetical)
 
-//    private final static String 	DEFAULT_COUNTRY = "United States";
-//    private final static boolean	DO_DEBUG = true;
-//    private final static boolean	DO_TRACE = false;
-//    private final static int 		FILE_COUNTRY_IDX = 4;
-//    private final static int 		FILE_DATE_IDX = 0;
-//    private final static int 		FILE_NUM_COLUMNS = 5;
-//    private final static int 		FILE_STATE_IDX = 3;
-//    private final static int 		FILE_TEMPERATURE_IDX = 1;
-//    private final static int 		FILE_UNCERTAINTY_IDX = 2;
-//
-//    private final static String[] 	MONTH_NAMES = { "", // 1-based
-//            "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec" };
+
+public class DataViewer {
+
+	
     private final static int		RECORD_MONTH_IDX = 1;
     private final static int		RECORD_STATE_IDX = 3;
     private final static int		RECORD_TEMPERATURE_IDX = 2;
     private final static int		RECORD_YEAR_IDX = 0;
 
 
-private ProcessData pd;
+    private ProcessData pd;
+
+    DataViewerHUD[] observers = new DataViewerHUD[5];
     
     // plot-related data
     private TreeMap<Integer, SortedMap<Integer,Double>> m_plotData = null;
@@ -46,9 +38,28 @@ private ProcessData pd;
     public DataViewer(String dataFile) throws FileNotFoundException {
     	
     	this.pd = new ProcessData(dataFile);
-        this.window = new DataViewerHUD(this);
         pd.loadData();
+        
 
+    }
+    
+    public void addObserver(DataViewerHUD hud) {
+    	for (int i = 0; i < observers.length; i++) {
+    		if (observers[i] == null) {
+    			observers[i] = hud; 
+    		}
+    		
+    	}
+    	notifyObservers();
+    	updatePlotData();
+    }
+    
+    public void removeObserver(DataViewerHUD hud) {
+    	//remove observer
+    }
+    
+    public void notifyObservers() {
+    	observers[0].updateObserver();
     }
 
     public void loadData(){
@@ -72,12 +83,12 @@ private ProcessData pd;
         // now run through the raw data and if it is related to the current state and within the current
         // years, put it in a sorted data structure, so that we
         // find min/max year based on data
-        m_plotMonthlyMaxValue = new TreeMap<Integer,Double>();
-        m_plotMonthlyMinValue = new TreeMap<Integer,Double>();
+        this.m_plotMonthlyMaxValue = new TreeMap<Integer,Double>();
+        this.m_plotMonthlyMinValue = new TreeMap<Integer,Double>();
         // initialize
         for(int i = 1; i <= 12; i++) {
-            m_plotMonthlyMaxValue.put(i, Double.MIN_VALUE);
-            m_plotMonthlyMinValue.put(i, Double.MAX_VALUE);
+            this.m_plotMonthlyMaxValue.put(i, Double.MIN_VALUE);
+            this.m_plotMonthlyMinValue.put(i, Double.MAX_VALUE);
         }
         for(List<Object> rec : pd.getM_dataRaw()) { //GET
             String state = (String)rec.get(RECORD_STATE_IDX);
@@ -102,6 +113,8 @@ private ProcessData pd;
             }
         }
         //debug("plot data: %s", m_plotData.toString());
+        
+        notifyObservers();
     }
 
 
