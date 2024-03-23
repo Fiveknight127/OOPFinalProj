@@ -58,6 +58,15 @@ public class GUIDataState extends GUIState {
 
         double cellWidth = window.getCanvasWidth()/nCols;
         double cellHeight = window.getCanvasHeight()/nRows;
+        
+        if(this.dataViewer.getM_selectedVisualization().equals("raw")){
+            this.strategy = new RawStrategy();
+        }
+        else if(this.dataViewer.getM_selectedVisualization().equals("Extrema (within 10% of min/max)")){
+            this.strategy = new ExtremaStrategy();
+
+        }
+        this.strategy.execute();
 
         //debug("cellWidth = %f, cellHeight = %f", cellWidth, cellHeight);
 //        if(strategy instanceof ExtremaStrategy) {
