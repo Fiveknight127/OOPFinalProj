@@ -9,8 +9,8 @@ public class VisualizationStrategy {
 	}
 	
 
-	    
-//	public Color execute() {
-//		
-//	}
+    
+	public Color execute() {
+		return null;
+}
 	}
