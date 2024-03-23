@@ -8,7 +8,6 @@ public class ExtremaStrategy extends VisualizationStrategy{
     private static double		TEMPERATURE_MIN_C = -10.0;
     private static double		TEMPERATURE_RANGE = TEMPERATURE_MAX_C - TEMPERATURE_MIN_C;
 
-	@Override
 	public Color execute() {
 		// TODO Auto-generated method stub
 		return null;
