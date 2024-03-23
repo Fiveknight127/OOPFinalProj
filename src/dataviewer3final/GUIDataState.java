@@ -97,10 +97,10 @@ public class GUIDataState extends GUIState {
                     // get either color or grayscale depending on visualization mode
 
                     if(this.dataViewer.getM_selectedVisualization().equals("raw")){
-                        this.strategy = new RawStrategy(cellHeight);
+                        this.strategy = new RawStrategy(value);
                     }
                     else if(this.dataViewer.getM_selectedVisualization().equals("Extrema (within 10% of min/max)")){
-                        this.strategy = new ExtremaStrategy(cellHeight, cellHeight, cellHeight);
+                        this.strategy = new ExtremaStrategy(value, extremaMinBound, extremaMaxBound);
 
                     }
                     this.strategy.execute();
